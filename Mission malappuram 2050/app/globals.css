@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-mist text-brand-midnight antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(246, 215, 122, 0.35), transparent 32%),
+      radial-gradient(circle at top right, rgba(224, 161, 27, 0.14), transparent 24%),
+      linear-gradient(180deg, rgba(255, 253, 245, 1) 0%, rgba(255, 248, 228, 0.88) 100%);
+  }
+
+  ::selection {
+    @apply bg-brand-gold/30 text-brand-midnight;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-brand-gold/20 bg-brand-midnight/80 text-white shadow-glass backdrop-blur-xl;
+  }
+
+  .glass-panel-light {
+    @apply border border-brand-gold/15 bg-white/75 shadow-glass backdrop-blur-xl;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-brand-gold via-yellow-500 to-brand-emerald bg-clip-text text-transparent;
+  }
+
+  .section-padding {
+    @apply px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40;
+  }
+
+  .heading-display {
+    @apply font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-7xl xl:text-8xl;
+  }
+
+  .heading-section {
+    @apply font-display text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl xl:text-6xl;
+  }
+
+  .body-large {
+    @apply text-lg font-light leading-relaxed text-brand-midnight/75 md:text-xl lg:text-2xl;
+  }
+
+  .body-text {
+    @apply text-base font-light leading-relaxed text-brand-midnight/70 md:text-lg;
+  }
+}
+
+@layer utilities {
+  .mask-fade-bottom {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  .mask-fade-edges {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+}
