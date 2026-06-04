@@ -1,4 +1,7 @@
+"use client";
+
 import { Linkedin, Twitter, Youtube, Mail } from "lucide-react";
+import Logo from "@/components/ui/Logo";
 
 const footerLinks = {
   Vision: [
@@ -23,27 +26,52 @@ const footerLinks = {
   ],
 };
 
+const socialLinks = [
+  { Icon: Linkedin, label: "LinkedIn", href: "#" },
+  { Icon: Twitter, label: "Twitter", href: "#" },
+  { Icon: Youtube, label: "YouTube", href: "#" },
+  { Icon: Mail, label: "Email", href: "mailto:info@missionmalappuram2050.org" },
+];
+
 export default function Footer() {
   return (
     <footer className="border-t border-brand-gold/15 bg-white/80 backdrop-blur-sm">
-      <div className="section-padding !py-16">
+      <div className="section-padding !py-12 sm:!py-16">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
-            <div className="lg:col-span-2">
-              <p className="font-display text-2xl font-semibold text-brand-midnight">
-                Mission <span className="text-brand-gold">Malappuram 2050</span>
-              </p>
-              <p className="mt-4 max-w-sm text-sm text-brand-midnight/60">
-                A community-owned future district transformation platform.
-                Preparing society before the future arrives.
-              </p>
-              <div className="mt-6 flex gap-4">
-                {[Linkedin, Twitter, Youtube, Mail].map((Icon, i) => (
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-12">
+            <div className="flex min-w-0 flex-col gap-10 sm:col-span-2 lg:col-span-4">
+              <div>
+                <Logo variant="footer" link />
+                <p className="mt-5 max-w-sm text-sm leading-relaxed text-brand-midnight/60">
+                  A community-owned future district transformation platform.
+                  Preparing society before the future arrives.
+                </p>
+              </div>
+
+              <div className="mt-2 min-w-0 border-t border-brand-gold/12 pt-6">
+                <h4 className="mb-3 block text-xs font-medium uppercase tracking-[0.2em] text-brand-midnight/45">
+                  Contact
+                </h4>
+                <ul className="space-y-3 text-sm leading-relaxed text-brand-midnight/65">
+                  <li>Malappuram, Kerala, India</li>
+                  <li className="pb-1">
+                    <a
+                      href="mailto:info@missionmalappuram2050.org"
+                      className="break-all hover:text-brand-midnight"
+                    >
+                      info@missionmalappuram2050.org
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="flex flex-wrap gap-3 pt-1">
+                {socialLinks.map(({ Icon, label, href }) => (
                   <a
-                    key={i}
-                    href="#"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-gold/15 text-brand-midnight/55 transition hover:border-brand-gold hover:text-brand-gold"
-                    aria-label="Social link"
+                    key={label}
+                    href={href}
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-brand-gold/15 text-brand-midnight/55 transition-colors hover:border-brand-gold hover:text-brand-gold"
+                    aria-label={label}
                   >
                     <Icon size={18} />
                   </a>
@@ -52,16 +80,16 @@ export default function Footer() {
             </div>
 
             {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title}>
-                <h4 className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-brand-midnight/45">
+              <div key={title} className="min-w-0 lg:col-span-2">
+                <h4 className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-brand-midnight/45">
                   {title}
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-2.5">
                   {links.map((link) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-sm text-brand-midnight/65 transition hover:text-brand-midnight"
+                        className="text-sm text-brand-midnight/65 transition-colors hover:text-brand-midnight"
                       >
                         {link.label}
                       </a>
@@ -70,33 +98,27 @@ export default function Footer() {
                 </ul>
               </div>
             ))}
-
-            <div>
-              <h4 className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-brand-midnight/45">
-                Contact
-              </h4>
-              <ul className="space-y-3 text-sm text-brand-midnight/65">
-                <li>Malappuram, Kerala, India</li>
-                <li>
-                  <a
-                    href="mailto:info@missionmalappuram2050.org"
-                    className="hover:text-brand-midnight"
-                  >
-                    info@missionmalappuram2050.org
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
 
-          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-brand-gold/15 pt-8 md:flex-row">
+          <div className="mt-12 flex flex-col items-center gap-4 border-t border-brand-gold/15 pt-8 text-center sm:mt-16 md:flex-row md:items-start md:justify-between md:text-left">
             <p className="text-xs text-brand-midnight/45">
               Copyright {new Date().getFullYear()} Mission Malappuram 2050. All
               rights reserved.
             </p>
-            <p className="text-xs text-brand-midnight/45">
-              Community-Owned | Founder-Controlled | Institution-Driven |
-              Youth-Operated
+            <p className="max-w-xl text-xs leading-relaxed text-brand-midnight/45">
+              <span className="inline-block">Community-Owned</span>
+              <span className="mx-2 hidden sm:inline" aria-hidden>
+                |
+              </span>
+              <span className="mt-1 block sm:mt-0 sm:inline">Founder-Controlled</span>
+              <span className="mx-2 hidden sm:inline" aria-hidden>
+                |
+              </span>
+              <span className="mt-1 block sm:mt-0 sm:inline">Institution-Driven</span>
+              <span className="mx-2 hidden sm:inline" aria-hidden>
+                |
+              </span>
+              <span className="mt-1 block sm:mt-0 sm:inline">Youth-Operated</span>
             </p>
           </div>
         </div>

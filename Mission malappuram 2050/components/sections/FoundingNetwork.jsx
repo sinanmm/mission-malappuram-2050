@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { itemTransition, transition, viewport } from "@/lib/motion";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -32,10 +33,11 @@ export default function FoundingNetwork() {
         {groups.map((group, i) => (
           <motion.div
             key={group.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
+            viewport={viewport}
+            transition={itemTransition(i)}
+            whileHover={{ y: -6, transition: transition.springSoft }}
             className="glass-panel rounded-3xl p-8"
           >
             <h3 className="font-display text-2xl font-semibold text-brand-gold">

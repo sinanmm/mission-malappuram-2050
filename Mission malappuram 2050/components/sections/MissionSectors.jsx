@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { itemTransition, transition, viewport } from "@/lib/motion";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import {
@@ -41,16 +42,16 @@ export default function MissionSectors() {
       <div className="relative mx-auto max-w-4xl">
         <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-gold/5 blur-3xl" />
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-3 min-[400px]:grid-cols-2 sm:grid-cols-3 sm:gap-4 md:gap-6 lg:grid-cols-5">
           {sectors.map(({ icon: Icon, title }, i) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 1, scale: 0.92 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              whileHover={{ scale: 1.05, y: -4 }}
-              className="glass-panel group flex flex-col items-center rounded-2xl p-6 text-center transition hover:border-brand-gold/30 hover:shadow-glow"
+              viewport={viewport}
+              transition={itemTransition(i)}
+              whileHover={{ scale: 1.05, y: -6, transition: transition.springSoft }}
+              className="glass-panel group flex min-w-0 flex-col items-center rounded-2xl p-5 text-center transition hover:border-brand-gold/30 hover:shadow-glow sm:p-6"
             >
               <Icon
                 className="mb-3 text-brand-gold transition group-hover:scale-110"

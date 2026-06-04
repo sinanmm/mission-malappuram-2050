@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { scrollReveal, transition, viewport } from "@/lib/motion";
 
 export default function GlassCard({
   children,
@@ -8,14 +9,28 @@ export default function GlassCard({
   hover = true,
   delay = 0,
 }) {
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) {
+    return (
+      <div className={`glass-panel rounded-2xl p-6 md:p-8 ${className}`}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
-      whileHover={hover ? { y: -4, transition: { duration: 0.3 } } : {}}
-      className={`glass-panel rounded-2xl p-6 md:p-8 ${className}`}
+      {...scrollReveal(delay)}
+      whileHover={
+        hover
+          ? {
+              y: -6,
+              transition: { type: "spring", stiffness: 400, damping: 28 },
+            }
+          : undefined
+      }
+      className={`glass-panel rounded-2xl p-6 transition-shadow duration-500 hover:shadow-glow md:p-8 ${className}`}
     >
       {children}
     </motion.div>

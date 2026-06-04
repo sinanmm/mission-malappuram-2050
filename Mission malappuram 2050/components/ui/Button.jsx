@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { transition } from "@/lib/motion";
 
 const variants = {
   primary:
@@ -18,20 +19,34 @@ export default function Button({
   className = "",
   onClick,
 }) {
+  const reduceMotion = useReducedMotion();
   const base =
-    "inline-flex items-center justify-center rounded-full px-8 py-4 text-sm font-medium tracking-wide transition-all duration-300 md:px-10 md:py-4 md:text-base";
+    "inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium tracking-wide transition-colors duration-300 sm:w-auto sm:px-8 sm:py-4 md:px-10 md:text-base";
 
-  const isExternal =
-    href.startsWith("#") ||
-    href.startsWith("mailto:") ||
-    href.startsWith("http");
+  const isHttp = href.startsWith("http");
+  const useAnchor =
+    href.startsWith("#") || href.startsWith("mailto:") || isHttp;
+
+  const anchorProps = isHttp
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
 
   const classNames = `${base} ${variants[variant]} ${className}`;
 
+  const hoverProps = reduceMotion
+    ? {}
+    : {
+        whileHover: { scale: 1.03, y: -2 },
+        whileTap: { scale: 0.98 },
+        transition: transition.spring,
+      };
+
+  const Wrapper = reduceMotion ? "div" : motion.div;
+
   return (
-    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-      {isExternal ? (
-        <a href={href} onClick={onClick} className={classNames}>
+    <Wrapper {...hoverProps}>
+      {useAnchor ? (
+        <a href={href} onClick={onClick} className={classNames} {...anchorProps}>
           {children}
         </a>
       ) : (
@@ -39,6 +54,6 @@ export default function Button({
           {children}
         </Link>
       )}
-    </motion.div>
+    </Wrapper>
   );
 }

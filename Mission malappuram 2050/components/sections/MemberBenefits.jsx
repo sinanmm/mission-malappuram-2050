@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { itemTransition, transition, viewport } from "@/lib/motion";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import {
@@ -35,10 +36,11 @@ export default function MemberBenefits() {
           {benefits.map(({ icon: Icon, title, desc }, i) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              viewport={viewport}
+              transition={itemTransition(i)}
+              whileHover={{ y: -4, transition: transition.springSoft }}
               className="group"
             >
               <Icon className="mb-4 text-brand-emerald" size={32} />

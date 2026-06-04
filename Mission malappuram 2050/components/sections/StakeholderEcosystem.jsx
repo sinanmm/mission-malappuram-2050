@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { transition } from "@/lib/motion";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import {
@@ -70,7 +71,8 @@ export default function StakeholderEcosystem() {
                   ? "border-brand-gold/50 bg-brand-gold/10"
                   : "border-white/10 bg-white/5 hover:border-white/20"
               }`}
-              whileHover={{ x: 4 }}
+              whileHover={{ x: 6, transition: transition.springSoft }}
+              whileTap={{ scale: 0.99 }}
             >
               <Icon
                 size={24}
@@ -84,9 +86,10 @@ export default function StakeholderEcosystem() {
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={transition.default}
             className="glass-panel flex flex-col justify-center rounded-3xl p-10 md:p-12"
           >
             {current && (

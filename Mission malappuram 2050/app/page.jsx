@@ -12,6 +12,7 @@ import MemberBenefits from "@/components/sections/MemberBenefits";
 import WhoShouldJoin from "@/components/sections/WhoShouldJoin";
 import Projects from "@/components/sections/Projects";
 import BlueZone from "@/components/sections/BlueZone";
+import BrandVersity from "@/components/sections/BrandVersity";
 import Promises from "@/components/sections/Promises";
 import Research from "@/components/sections/Research";
 import CoreTeam from "@/components/sections/CoreTeam";
@@ -37,6 +38,7 @@ export default function Home() {
       <WhoShouldJoin />
       <Projects />
       <BlueZone />
+      <BrandVersity />
       <Promises />
       <Research />
       <CoreTeam />

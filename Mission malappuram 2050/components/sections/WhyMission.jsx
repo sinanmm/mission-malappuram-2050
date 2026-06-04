@@ -3,6 +3,7 @@
 import SafeImage from "@/components/ui/SafeImage";
 import { siteImages } from "@/lib/images";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { itemTransition, transition, viewport } from "@/lib/motion";
 import { useRef } from "react";
 import Section from "@/components/ui/Section";
 import {
@@ -132,12 +133,12 @@ export default function WhyMission() {
           ))}
         </div>
 
-        <div className="relative z-10 grid items-center gap-10 xl:grid-cols-[1.05fr_0.95fr] xl:gap-14">
+        <div className="relative z-10 grid items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-14">
           <motion.div
             style={{ y: imageY }}
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 1, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-120px" }}
+            viewport={{ ...viewport, margin: "-120px" }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
@@ -156,9 +157,9 @@ export default function WhyMission() {
 
                 <motion.div
                   style={{ y: badgeY }}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 1, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={viewport}
                   transition={{ duration: 0.8, delay: 0.25 }}
                   className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/25 px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-white/75 backdrop-blur-xl md:left-7 md:top-7"
                 >
@@ -169,10 +170,10 @@ export default function WhyMission() {
                 {floatingStats.map((stat, index) => (
                   <motion.div
                     key={stat.title}
-                    initial={{ opacity: 0, y: 20, scale: 0.96 }}
+                    initial={{ opacity: 1, y: 20, scale: 0.96 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     whileHover={{ y: -4, scale: 1.02 }}
-                    viewport={{ once: true }}
+                    viewport={viewport}
                     transition={{
                       duration: 0.7,
                       delay: 0.22 + index * 0.12,
@@ -198,9 +199,9 @@ export default function WhyMission() {
                 </motion.div>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 26 }}
+                  initial={{ opacity: 1, y: 26 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={viewport}
                   transition={{ duration: 0.85, delay: 0.35 }}
                   className="absolute inset-x-5 bottom-5 rounded-[1.75rem] border border-white/10 bg-[linear-gradient(135deg,rgba(19,19,19,0.56),rgba(255,255,255,0.08))] p-5 shadow-[0_20px_70px_rgba(0,0,0,0.35)] backdrop-blur-2xl md:inset-x-7 md:bottom-7 md:p-6"
                 >
@@ -221,7 +222,7 @@ export default function WhyMission() {
             variants={containerVariants}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-120px" }}
+            viewport={{ ...viewport, margin: "-120px" }}
             className="relative"
           >
             <motion.div
@@ -234,7 +235,7 @@ export default function WhyMission() {
 
             <motion.h2
               variants={itemVariants}
-              className="mt-7 max-w-2xl font-display text-[2.8rem] leading-[0.95] tracking-[-0.04em] text-[#fff7ea] sm:text-[3.6rem] lg:text-[4.4rem] xl:text-[5rem]"
+              className="mt-7 max-w-2xl font-display text-3xl leading-[0.95] tracking-[-0.04em] text-[#fff7ea] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
             >
               A Sustainable
               <span className="block bg-gradient-to-r from-[#fff7ea] via-[#f6d77a] to-[#dbeadf] bg-clip-text text-transparent">
@@ -259,10 +260,10 @@ export default function WhyMission() {
               {ecosystemDrivers.map((item, index) => (
                 <motion.span
                   key={item}
-                  initial={{ opacity: 0, y: 18 }}
+                  initial={{ opacity: 1, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   whileHover={{ y: -3, scale: 1.03 }}
-                  viewport={{ once: true }}
+                  viewport={viewport}
                   transition={{
                     duration: 0.55,
                     delay: 0.08 + index * 0.05,
@@ -282,14 +283,14 @@ export default function WhyMission() {
               {metrics.map(({ value, label, icon: Icon }, index) => (
                 <motion.div
                   key={label}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 1, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   whileHover={{
                     y: -6,
                     scale: 1.01,
                     borderColor: "rgba(246,215,122,0.28)",
                   }}
-                  viewport={{ once: true }}
+                  viewport={viewport}
                   transition={{
                     duration: 0.65,
                     delay: 0.18 + index * 0.08,
@@ -303,7 +304,7 @@ export default function WhyMission() {
                       <p className="text-[11px] uppercase tracking-[0.28em] text-white/42">
                         Strategic Scale
                       </p>
-                      <p className="mt-4 font-display text-3xl leading-none text-[#fff8eb] md:text-[2.2rem]">
+                      <p className="mt-4 font-display text-2xl leading-none text-[#fff8eb] sm:text-3xl lg:text-4xl">
                         {value}
                       </p>
                       <p className="mt-3 text-sm leading-6 text-white/62">

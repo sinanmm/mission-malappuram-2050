@@ -2,8 +2,8 @@
 
 import SafeImage from "@/components/ui/SafeImage";
 import { siteImages } from "@/lib/images";
-import { motion } from "framer-motion";
 import Section from "@/components/ui/Section";
+import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import { Layers, Handshake, Landmark, Users } from "lucide-react";
@@ -25,12 +25,12 @@ export default function BusinessModel() {
       />
 
       <div className="grid items-center gap-16 lg:grid-cols-2">
-        <div className="relative aspect-video overflow-hidden rounded-3xl">
+        <Reveal direction="left" className="relative aspect-video overflow-hidden rounded-3xl">
           <SafeImage
             src={siteImages.businessModel}
             alt="Real estate and development"
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-midnight via-transparent to-transparent" />
@@ -40,9 +40,9 @@ export default function BusinessModel() {
             </p>
             <p className="text-sm text-white/70">Acres Identified</p>
           </div>
-        </div>
+        </Reveal>
 
-        <div>
+        <Reveal direction="right" delay={0.1}>
           <p className="body-text mb-8">
             Across Malappuram there are numerous incomplete lands, stalled
             projects, and underutilized opportunities. Mission Malappuram
@@ -63,7 +63,7 @@ export default function BusinessModel() {
               development.
             </p>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

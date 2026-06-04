@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { itemTransition, viewport } from "@/lib/motion";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -60,12 +61,11 @@ export default function Governance() {
         {layers.map((layer, i) => (
           <motion.div
             key={layer.entity}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 1, x: -28 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="glass-panel group flex flex-col gap-2 rounded-2xl p-6 transition hover:border-brand-gold/20 md:flex-row md:items-center md:justify-between md:p-8"
-            style={{ marginLeft: `${i * 12}px`, marginRight: `${(layers.length - 1 - i) * 12}px` }}
+            viewport={viewport}
+            transition={itemTransition(i)}
+            className="glass-panel group flex flex-col gap-2 rounded-2xl p-5 transition hover:border-brand-gold/20 sm:p-6 md:flex-row md:items-center md:justify-between md:p-8"
           >
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.2em] text-brand-gold">

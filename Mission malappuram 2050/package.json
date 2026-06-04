@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/clean-next-cache.mjs && next dev",
+    "dev": "next dev",
+    "dev:fresh": "node scripts/dev-fresh.mjs",
+    "clean": "node scripts/clean-next-cache.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "brand:assets": "python3 scripts/generate-brand-assets.py"
   },
   "dependencies": {
     "framer-motion": "^11.15.0",

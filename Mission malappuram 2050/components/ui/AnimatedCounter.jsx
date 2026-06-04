@@ -1,24 +1,30 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, motion } from "framer-motion";
+import { useInView, motion, useReducedMotion } from "framer-motion";
+import { scrollReveal, viewport } from "@/lib/motion";
 
 export default function AnimatedCounter({
   end,
   suffix = "",
   prefix = "",
   label,
-  duration = 2,
+  duration = 2.2,
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [count, setCount] = useState(0);
+  const isInView = useInView(ref, { once: viewport.once, margin: viewport.margin });
+  const reduceMotion = useReducedMotion();
+  const [count, setCount] = useState(reduceMotion ? end : 0);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || reduceMotion) {
+      if (isInView) setCount(end);
+      return;
+    }
 
     let start = 0;
-    const increment = end / (duration * 60);
+    const steps = duration * 60;
+    const increment = end / steps;
     const timer = setInterval(() => {
       start += increment;
       if (start >= end) {
@@ -30,16 +36,10 @@ export default function AnimatedCounter({
     }, 1000 / 60);
 
     return () => clearInterval(timer);
-  }, [isInView, end, duration]);
+  }, [isInView, end, duration, reduceMotion]);
 
   return (
-    <motion.div
-      ref={ref}
-      className="text-center"
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6 }}
-    >
+    <motion.div ref={ref} className="text-center" {...scrollReveal(0)}>
       <div className="font-display text-4xl font-semibold tracking-tight text-brand-midnight md:text-5xl lg:text-6xl">
         {prefix}
         {count.toLocaleString("en-IN")}

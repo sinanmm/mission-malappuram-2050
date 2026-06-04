@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Container from "./Container";
+import { transition, viewport } from "@/lib/motion";
 
 export default function Section({
   id,
@@ -9,24 +10,34 @@ export default function Section({
   className = "",
   containerClassName = "",
   light = false,
+  dark = false,
+  animate = true,
 }) {
+  const reduceMotion = useReducedMotion();
+  const tone = dark
+    ? "bg-brand-midnight text-white"
+    : light
+      ? "bg-white text-brand-midnight"
+      : "bg-brand-mist text-brand-midnight";
+
   return (
     <section
       id={id}
-      className={`section-padding relative overflow-hidden ${
-        light ? "bg-white text-brand-midnight" : "bg-brand-mist text-brand-midnight"
-      } ${className}`}
+      className={`section-padding relative min-w-0 overflow-hidden ${tone} ${className}`}
     >
-      <Container className={containerClassName}>
+      {animate && !reduceMotion ? (
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 1, y: 34, scale: 0.995 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={viewport}
+          transition={transition.slow}
+          className="will-change-transform"
         >
-          {children}
+          <Container className={containerClassName}>{children}</Container>
         </motion.div>
-      </Container>
+      ) : (
+        <Container className={containerClassName}>{children}</Container>
+      )}
     </section>
   );
 }

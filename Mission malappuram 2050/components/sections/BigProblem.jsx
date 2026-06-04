@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { itemTransition, viewport } from "@/lib/motion";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
@@ -57,10 +58,10 @@ export default function BigProblem() {
         {disruptions.map((item, i) => (
           <motion.span
             key={item}
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 1, scale: 0.92 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
+            viewport={viewport}
+            transition={itemTransition(i)}
             className="glass-panel rounded-full px-6 py-3 text-sm text-white/80"
           >
             {item}
@@ -83,12 +84,13 @@ export default function BigProblem() {
         {leaderQuotes.map((item, i) => (
           <motion.blockquote
             key={i}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+            initial={{ opacity: 1, x: i % 2 === 0 ? -32 : 32 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={viewport}
+            transition={itemTransition(i, 0.15)}
             className="border-l-2 border-brand-gold/50 pl-8"
           >
-            <p className="text-xl font-light italic text-white/80 md:text-2xl">
+            <p className="text-xl font-light italic text-brand-midnight/80 md:text-2xl">
               &ldquo;{item.quote}&rdquo;
             </p>
             <cite className="mt-3 block text-sm not-italic text-brand-gold">

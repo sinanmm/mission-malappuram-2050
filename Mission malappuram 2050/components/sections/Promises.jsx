@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { itemTransition, transition, viewport } from "@/lib/motion";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { CheckCircle2 } from "lucide-react";
@@ -24,10 +25,10 @@ export default function Promises() {
         {deliverables.map(({ item, progress }, i) => (
           <motion.div
             key={item}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 1, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
+            viewport={viewport}
+            transition={itemTransition(i)}
           >
             <div className="mb-3 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -42,8 +43,8 @@ export default function Promises() {
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${progress}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.3 + i * 0.2 }}
+                viewport={viewport}
+                transition={{ ...transition.slow, delay: 0.25 + i * 0.15 }}
                 className="h-full rounded-full bg-gradient-to-r from-brand-emerald to-brand-gold"
               />
             </div>

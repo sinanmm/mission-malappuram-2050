@@ -2,10 +2,12 @@
 
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { itemTransition, transition, viewport } from "@/lib/motion";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SafeImage from "@/components/ui/SafeImage";
 import { siteImages } from "@/lib/images";
+import { projectLinks } from "@/lib/projectLinks";
 import { ArrowUpRight } from "lucide-react";
 
 const slugify = (name) =>
@@ -19,12 +21,17 @@ const projects = [
     name: "Blue Zone Habitat",
     desc: "Homes that heal — longevity living & wellness architecture",
     image: siteImages.projectBlueZone,
+    href: projectLinks.blueZoneHabitat,
     featured: true,
   },
   {
     name: "Brand Versity",
-    desc: "Brand education and creative excellence",
+    desc: "Digital marketing academy, agency & startup incubation",
     image: siteImages.projectBrandVersity,
+    href: projectLinks.brandVersity,
+    imageAlt: "BrandVersity — building entrepreneurs in digital marketing",
+    imageClassName: "object-cover object-top",
+    imageOverlay: "from-[#0a1835] via-[#0c1f3f]/75",
   },
   {
     name: "Entrepreneurs Business School",
@@ -38,8 +45,12 @@ const projects = [
   },
   {
     name: "SEEAKK",
-    desc: "Innovation and knowledge ecosystem",
+    desc: "Lead performance dynamics — lead accountability and team performance",
     image: siteImages.projectSeekk,
+    href: projectLinks.seeaakk,
+    imageAlt: "SEEAKK — Lead Performance Dynamics platform",
+    imageClassName: "object-cover object-top",
+    imageOverlay: "from-brand-midnight via-brand-midnight/70",
   },
   {
     name: "AI School",
@@ -52,9 +63,9 @@ const projects = [
     image: siteImages.projectDesignSchool,
   },
   {
-    name: "Thanal Valley",
-    desc: "Sustainable valley development",
-    image: siteImages.projectThanalValley,
+    name: "beondliving",
+    desc: "Affordable, high-standard living for every family",
+    image: siteImages.businessModel,
   },
   {
     name: "Consultancy Services",
@@ -74,23 +85,37 @@ export default function Projects() {
   }, []);
 
   return (
-    <Section id="projects">
+    <Section id="projects" dark>
       <SectionHeading
+        dark
         eyebrow="Project Ecosystem"
         title="Building the Future, Project by Project"
         subtitle="A portfolio of institutions, platforms, and developments powering Malappuram 2.0."
       />
 
       <div className="grid gap-6 md:grid-cols-2">
-        {projects.map((project, i) => (
+        {projects.map((project, i) => {
+          const slug = slugify(project.name);
+          const isExternal = Boolean(project.href);
+
+          return (
           <motion.a
             key={project.name}
-            id={slugify(project.name)}
-            href={`#${slugify(project.name)}`}
-            initial={{ opacity: 0, y: 30 }}
+            id={slug}
+            href={project.href ?? `#${slug}`}
+            {...(isExternal
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            aria-label={
+              isExternal
+                ? `${project.name} — opens in a new tab`
+                : project.name
+            }
+            initial={{ opacity: 1, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
+            viewport={viewport}
+            transition={itemTransition(i)}
+            whileHover={{ y: -6, transition: transition.springSoft }}
             className={`group relative overflow-hidden rounded-3xl ${
               project.featured ? "md:col-span-2 md:row-span-1" : ""
             }`}
@@ -102,16 +127,23 @@ export default function Projects() {
             >
               <SafeImage
                 src={project.image}
-                alt={project.name}
+                alt={project.imageAlt ?? project.name}
                 fill
-                className="object-cover transition duration-700 group-hover:scale-105"
+                className={`transition duration-700 group-hover:scale-105 ${
+                  project.imageClassName ?? "object-cover"
+                }`}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-midnight via-brand-midnight/40 to-transparent" />
+              <div
+                className={`absolute inset-0 bg-gradient-to-t to-transparent ${
+                  project.imageOverlay ??
+                  "from-brand-midnight via-brand-midnight/40"
+                }`}
+              />
               <div className="absolute inset-0 flex flex-col justify-end p-8">
                 <div className="flex items-end justify-between">
                   <div>
-                    <h3 className="font-display text-2xl font-semibold md:text-3xl">
+                    <h3 className="font-display text-2xl font-semibold text-white md:text-3xl">
                       {project.name}
                     </h3>
                     <p className="mt-2 max-w-md text-sm text-white/60 md:text-base">
@@ -126,7 +158,8 @@ export default function Projects() {
               </div>
             </div>
           </motion.a>
-        ))}
+          );
+        })}
       </div>
     </Section>
   );
