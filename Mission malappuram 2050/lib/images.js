@@ -11,7 +11,7 @@ export const siteImages = {
   whyMission: unsplash("photo-1500530855697-b586d89ba3ee", 2400),
   businessModel: unsplash("photo-1560518883-ce09059eeffa", 1920),
   blueZone: local("/images/blue-zone-habitat.jpg"),
-  research: unsplash("photo-1562774053-701939374585"),
+  research: local("/images/madras.webp"),
   asiPrepared: unsplash("photo-1677442136019-21780ecad995"),
   finalCta: unsplash("photo-1501785888041-af3ef285b470"),
   teamChairman: local("/shahid.JPG"),
@@ -27,7 +27,7 @@ export const siteImages = {
   projectDesignSchool: unsplash("photo-1557804506-669a67965ba0"),
   projectThanalValley: unsplash("photo-1500382017468-9049fed747ef"),
   projectConsultancy: unsplash("photo-1552664730-d307ca884978"),
-  projectSports: unsplash("photo-1461896836934-ffe607ba8211"),
+  projectSports: local("/3gmasda.jpeg"),
 };
 
 /** Gradient SVG used when a remote image fails to load in the browser. */

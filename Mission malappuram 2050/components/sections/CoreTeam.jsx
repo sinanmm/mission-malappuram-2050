@@ -11,6 +11,7 @@ const chairman = {
   name: "Dr Sahid Cholayil",
   role: "Founder & Chairman",
   image: siteImages.teamChairman,
+  desc: "Humanitarian, futurist, and social innovator associated with the 3G Institute of Research & Policy Studies (3G IRPS) and the Mission Malappuram 2050 initiative.",
 };
 
 export default function CoreTeam() {
@@ -38,12 +39,15 @@ export default function CoreTeam() {
             className="object-cover object-top grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.04]"
             sizes="(max-width: 640px) 90vw, 28rem"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-midnight via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-6">
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-midnight via-brand-midnight/60 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-500">
             <h3 className="font-display text-xl font-semibold text-white md:text-2xl">
               {chairman.name}
             </h3>
-            <p className="mt-1 text-sm text-white/85">{chairman.role}</p>
+            <p className="mt-1 text-sm font-medium text-brand-gold">{chairman.role}</p>
+            <p className="mt-3 text-sm leading-relaxed text-white/80 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+              {chairman.desc}
+            </p>
           </div>
         </div>
       </motion.div>

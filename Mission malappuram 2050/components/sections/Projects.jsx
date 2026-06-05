@@ -73,9 +73,10 @@ const projects = [
     image: siteImages.projectConsultancy,
   },
   {
-    name: "Sports Development Platform",
+    name: "3G Masda",
     desc: "Youth sports excellence and infrastructure",
     image: siteImages.projectSports,
+    href: "https://www.3gmasda.com/",
   },
 ];
 
